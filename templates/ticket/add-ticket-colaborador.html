@@ -1,0 +1,33 @@
+{% extends '_layout/base.html' %}
+
+{% block conteudo %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            {{ tiket.ticket }}Aqui você poderá adicionar o Colaborador ao ticket!
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                    <thead>
+                            <tr align="center">
+                                <th scope="col">Colaborador</th>
+                                <th scope="col">Função</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                            {% for colaborador in colaboradores %}
+                            <tr align="center">
+                                <td>{{ colaborador.nomeCol }}</td>
+                                <td>{{ colaborador.funcao }}</td>                         
+                                <td>
+                                    <a href="/ticket/cadastrar-ticket-colaborador/{{colaborador.pk}}/{{id_ticket}}"><button class="btn btn-info"><i class="fas fa-plus"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div> 
+
+{% endblock %}

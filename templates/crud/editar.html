@@ -1,0 +1,11 @@
+{% extends '_layout/base.html' %}
+
+{% block conteudo %}
+<div class='row'>
+    <form action="/{{url}}/editar-{{url}}/{{id}}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Salvar</button>
+    </form>        
+</div>
+{% endblock %}

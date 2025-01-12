@@ -1,0 +1,40 @@
+{% extends '_layout/base.html' %}
+
+{% block conteudo %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-warning" href="{% url 'add-cliente' %}"><i class="fas fa-plus"></i> Add cliente </a>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                    <thead>
+                            <tr align="center">
+                                <th scope="col">Nome</th>
+                                <th scope="col">Gerente Loja</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Gerente Reg.</th>
+                                <th scope="col">Endereço</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr align="center">
+                                <td>{{ cliente.nome }} | {{ cliente.usuario}}</td>
+                                <td>{{ cliente.gerente_loja }}</td>                                
+                                <td>{{ cliente.telefone }}</td>                                
+                                <td>{{ cliente.gerente_regional}}</td> 
+                                <td>{{ cliente.enderecoCli }}</td>                               
+                                <td>
+                                    <a href="/cliente/editar-cliente/{{ cliente.id }}"><button class="btn btn-success"><i class="fas fa-edit text-white"></i></button></a> |
+                                    <a href="/cliente/deletar-cliente/{{ cliente.id }}"><button class="btn btn-danger"><i class="fas fa-trash text-white"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+    </div>
+</div>
+{% endblock %}

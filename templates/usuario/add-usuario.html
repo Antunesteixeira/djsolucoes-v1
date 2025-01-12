@@ -1,0 +1,32 @@
+{% extends "_layout/base.html" %}
+
+{% block conteudo %}
+<form action="{% url 'add-usuario' %}" method="post">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputName">Nome de Usuario</label>
+          <input type="text" name="username" class="form-control" id="inputCity">
+        </div>
+        
+        <div class="form-group col-md-4">
+          <label for="inputEmail">Email</label>
+          <input type="email" name="email" class="form-control" id="inputEmail">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword">Senha</label>
+          <input type="password" name="password" class="form-control" id="inputPassword">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="inputEstado">Nivel</label>
+          <select id="inputEstado" name="nivel" class="form-control">
+            <option selected>Escolher...</option>
+            <option value="operador">Operador</option>
+          </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </div>
+</form>
+{% endblock %}

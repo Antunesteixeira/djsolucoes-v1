@@ -1,0 +1,39 @@
+{% extends '_layout/base.html' %}
+
+{% block conteudo %}
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-warning" href="{% url 'add-usuario' %}"><i class="fas fa-plus"></i> Add Usuário </a>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                    <thead>
+                            <tr align="center">
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Função</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Pix</th>
+                                <th scope="col">Nível</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuarios %}
+                            <tr align="center">
+                                <td>{{ usuario.username }}</td>
+                                <td>{{ usuario.funcao }}</td>                                
+                                <td>{{ usuario.cpf_cnpj }}</td>                                
+                                <td>{{ usuario.pix }}</td> 
+                                <td>{{ usuario.enderecoCol }}</td>                               
+                                <td>
+                                    <a href="/usuario/perfil-usuario/{{ usuario.id }}"><button class="btn btn-warning"><i class="fas fa-user text-white"></i></button></a>
+                                    <a href="/usuario/editar-usuario/{{ usuario.id }}"><button class="btn btn-success"><i class="fas fa-edit text-white"></i></button></a> 
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+{% endblock %}

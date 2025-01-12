@@ -1,0 +1,139 @@
+{% extends '_layout/base.html' %}
+
+
+{% block conteudo %}
+
+    <!-- Content -->
+    <div class="row">
+      <!-- Page header -->
+      <div class="row align-items-center mb-7">
+        
+        <div class="col">
+          <h1 class="fs-4 mb-0">Ticket: #{{ ticket.ticket }}</h1>
+        </div>
+        <div class="col-12 col-sm-auto mt-4 mt-sm-4">
+          <!-- Action -->
+          <p><a class="btn btn-success d-block" href="/ticket/editar-ticket/{{ticket.id}}"><i class="fas fa-edit"></i></a></p>
+          <p><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-trash"></i>
+          </a></p>
+        </div>
+      </div>
+
+      <!-- Page content -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center justify-content-between mb-7">
+            
+            <div class="col-auto">
+              <p class="text-end text-body-secondary mb-0">
+                <p class="text-body-secondary mb-0">
+                    <span class="fw-bold text-body">Colaborador:</span>
+                    <span class="text-body">{{ ticket.colaborador }}</span>
+                </p>
+                <p class="text-body-secondary mb-0">
+                    <span class="fw-bold text-body">Função:</span>
+                    <span class="text-body">{{ ticket.colaborador.funcao }}</span>
+                </p>
+              </p>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-7">
+            <div class="col-auto">
+              <p class="text-body-secondary mb-0">
+                <span class="fw-bold text-body">Operador DJ:</span>
+                <span class="text-body">{{ ticket.usuario }}</span>
+              </p>
+              <p class="text-body-secondary mb-0">
+                <span class="fw-bold text-body">Serviço para:</span>
+                <span class="text-body">{{ ticket.cliente }}</span>
+              </p>
+              <p>
+                Telefone: {{ ticket.cliente.telefone }} <br />
+              </p>
+            </div>
+           
+          </div>
+          <div class="list-group mb-7">
+            <div class="list-group-item bg-body">
+              <div class="row">
+                <div class="col">Mão de Obra</div>
+                <div class="col-auto">R$ {{ ticket.valor_mao_obra }}</div>
+              </div>
+            </div>
+            <div class="list-group-item bg-body">
+              <div class="row">
+                <div class="col">Material</div>
+                <div class="col-auto">R$ {{ ticket.valor_custo }}</div>
+              </div>
+            </div>
+            <div class="list-group-item bg-body">
+              <div class="row">
+                <div class="col">
+                  <strong>Custo Total</strong>
+                </div>
+                <div class="col-auto">
+                  <strong>R$ {{ valor_custo_total }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="fs-base">Notas:</h3>
+		  <p class="text-body-secondary mb-0">
+            <strong>Faturamento: R$ {{ ticket.valor_faturamento }} </strong> <br />
+          </p>
+          <p class="text-body-secondary mb-0">
+          <strong> Status:</strong> 
+                    {% if ticket.status == 'L' %}
+                        <span class="badge text-bg-warning">Levantamento</span>
+                    {% endif %}
+                    {% if ticket.status == 'O' %}
+                        <span class="badge text-bg-info">Orçamento</span>
+                    {% endif %}
+                    {% if ticket.status == 'A' %}
+                        <span class="badge text-bg-success">Aprovado</span>
+                    {% endif %}
+                    {% if ticket.status == 'F' %}
+                        <span class="badge text-bg-danger">Finalizado</span>
+                    {% elif ticket.status == 'B' %}
+                        <span class="badge text-bg-dark">Buscar Prestador</span>
+                    {% endif %}
+                    <br />
+          </p>
+          <p class="text-body-secondary mb-0">
+            <strong>Descrição:</strong>{{ ticket.descricao }} <br />
+          </p>
+          <p class="text-body-secondary mb-0">
+            <strong>Fator/Margem: </strong>{{ bdi }}<br />
+          </p>
+          <p class="text-body-secondary mb-0">
+            <strong>Data:</strong> {{ ticket.data_criacao }} <br />
+          </p>
+          <p class="text-body-secondary mb-0">
+            <strong>Finalizar:</strong> {{ ticket.data_finalizar }} <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Opções de Delete</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Deseja realmente deletar o ticket?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <a type="button" href="/task/deletar-task/{{ticket.id}}" class="btn btn-danger">Deletar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+{% endblock %}

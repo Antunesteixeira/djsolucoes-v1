@@ -1,0 +1,69 @@
+{% extends '_layout/base.html' %}
+
+{% block conteudo %}
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-warning" href="{% url 'add-ticket' %}"><i class="fas fa-plus"></i> Add ticket </a>
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr align="center">
+                        <th scope="col">#ticket</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Colaborador</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr align="center">
+                        <td>{{ ticket.ticket }}</td>
+                        <td>{{ ticket.usuario }}</td>                                
+                        <td>
+                            {% if not ticket.colaborador  %}
+                                <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
+                            {% else %}
+                                {{ ticket.colaborador }}
+                            {% endif %}
+
+                        </td>                                
+                        <td>
+                            {% if not ticket.cliente %}
+                                <a href="/ticket/add-ticket-cliente/{{ticket.id}}"><button class="btn btn-dark"><i class="fas fa-users"></i></button></a>
+                            {% else %}
+                                {{ ticket.cliente }}
+                            {% endif %}
+                        </td> 
+                        <td>
+                            {% if ticket.status == 'L' %}
+                            <span class="badge text-bg-warning">Levantamento</span>
+                            {% endif %}
+                            {% if ticket.status == 'O' %}
+                                <span class="badge text-bg-info">Orçamento</span>
+                            {% endif %}
+                            {% if ticket.status == 'A' %}
+                                <span class="badge text-bg-success">Aprovado</span>
+                            {% endif %}
+                            {% if ticket.status == 'F' %}
+                                <span class="badge text-bg-danger">Finalizado</span>
+                            {% endif %}
+                            {% if ticket.status == 'B' %}
+                                <span class="badge text-bg-dark">Buscar Prestador</span>
+                            {% endif %}                              
+                        <td>
+                            <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye" title="Clique aqui para mais informações do ticket"></i></button></a> |
+                            <a href="/ticket/editar-ticket/{{ ticket.id }}"><button class="btn btn-success"><i class="fas fa-edit" title="Clique aqui para editar o ticket"></i></button></a> |
+                            <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger"><i class="fas fa-trash" title="Clique aqui para deletar o ticket"></i></button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

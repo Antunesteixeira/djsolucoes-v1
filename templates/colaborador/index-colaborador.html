@@ -1,0 +1,38 @@
+{% extends "_layout/base.html" %}
+
+{% block conteudo %}
+<div class="card mb-4">
+    <div class="card-header">
+        <a class="btn btn-warning" href="{% url 'add-colaborador' %}"><i class="fas fa-plus"></i> Add colaborador </a>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+                <thead>
+                        <tr align="center">
+                            <th scope="col">Nome</th>
+                            <th scope="col">Função</th>
+                            <th scope="col">CPF/CNPJ</th>
+                            <th scope="col">Pix</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for colaborador in colaboradores %}
+                        <tr align="center">
+                            <td>{{ colaborador.nomeCol }}</td>
+                            <td>{{ colaborador.funcao }}</td>                                
+                            <td>{{ colaborador.cpf_cnpj }}</td>                                
+                            <td>{{ colaborador.pix }}</td> 
+                            <td>{{ colaborador.enderecoCol }}</td>                               
+                            <td>
+                                <a href="/colaborador/editar-colaborador/{{ colaborador.pk }}"><button class="btn btn-success"><i class="fas fa-edit text-white"></i></button></a> |
+                                <a href="/colaborador/deletar-colaborador/{{ colaborador.pk }}"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+{% endblock %}
