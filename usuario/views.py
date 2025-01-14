@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 def dashboarUsuario(request):
     usuarios = User.objects.all()
     context = {
-        'title': 'Usuarios',
+        'title': 'Usuários',
         'usuarios': usuarios
     }
     return render(request, 'usuario/index-usuarios.html', context)
@@ -36,7 +36,7 @@ def addUsuario(request):
     
     else:
         context = {
-            'title': 'Cadastro de Usuario'
+            'title': 'Cadastro de Usuário'
         }
         return render(request, 'usuario/add-usuario.html', context)
     
@@ -50,6 +50,6 @@ def perfilUsuario(request, id_usuario):
     usuario = User.objects.get(pk=id_usuario)
     context = {
         'usuario':usuario,
-        'title': 'Perfil do Usuario',
+        'title': 'Perfil do Usuário',
     }
     return render(request, 'usuario/perfil-usuario.html', context)
