@@ -51,6 +51,7 @@
                     <th scope="col">Usuário</th>
                     <th scope="col">Colaborador</th>
                     <th scope="col">Cliente</th>
+                    <th scope="col">Emergencial</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -74,7 +75,8 @@
                         {% else %}
                             {{ ticket.cliente }}
                         {% endif %}
-                    </td> 
+                    </td>
+                    <td> {{ ticket.emergencial }} </td> 
                     <td>
                         {% if ticket.status == 'L' %}
                         <span class="badge text-bg-warning">Levantamento</span>

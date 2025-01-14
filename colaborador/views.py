@@ -35,6 +35,9 @@ def addColaborador(request):
             obj.save()
             messages.add_message(request, messages.SUCCESS, "Colaborador cadastrado com sucesso!")
             return redirect('/colaborador/', messages)
+        else:
+            messages.add_message(request, messages.ERROR, "Colaborador não cadastrado! Verifique o erro!")
+            return redirect('/colaborador/', messages)
     else:    
         form = ColaboradorForm()
 

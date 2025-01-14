@@ -11,6 +11,7 @@ class Ticket(models.Model):
     colaborador = models.ForeignKey(Colaborador, on_delete=models.SET_NULL, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True)
     status = models.CharField(max_length=1, choices=[('L', 'Levantamento'), ('O', 'Orçamento'), ('A', 'Aprovado'), ('F', 'Finalizado'), ('E', 'Emergencial')])
+    emergencial = models.BooleanField(default=False)
     descricao = models.TextField()
     valor_mao_obra = models.DecimalField(max_digits=10, decimal_places=2)
     valor_custo = models.DecimalField(max_digits=10, decimal_places=2)
@@ -31,7 +32,7 @@ class Ticket(models.Model):
     
     def func_bdi(self):
         return self.valor_faturamento/self.func_valor_custo_total()
-    
+
     def func_finalizado(self):
         if self.status == 'F':
             self.finalizado = True
