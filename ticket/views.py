@@ -100,7 +100,7 @@ def addTicketCliente(request, id_ticket):
     usuario = request.user
     if request.method == 'GET':
         if has_role(usuario, [User, 'super']):
-            clientes = Cliente.objects.filter(usuario=usuario)
+            clientes = Cliente.objects.all()
         else:
             clientes = Cliente.objects.filter(usuario=usuario)    
     
