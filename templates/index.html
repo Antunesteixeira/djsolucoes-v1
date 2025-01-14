@@ -62,7 +62,7 @@
                     <td>{{ ticket.usuario }}</td>                                
                     <td>
                         {% if not ticket.colaborador  %}
-                            <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
+                            <a href="/ticket/add-ticket-colaborador/{{ticket.id}}?origem=link-index"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
                         {% else %}
                             {{ ticket.colaborador }}
                         {% endif %}

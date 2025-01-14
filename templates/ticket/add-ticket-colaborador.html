@@ -21,7 +21,7 @@
                                 <td>{{ colaborador.nomeCol }}</td>
                                 <td>{{ colaborador.funcao }}</td>                         
                                 <td>
-                                    <a href="/ticket/cadastrar-ticket-colaborador/{{colaborador.pk}}/{{id_ticket}}"><button class="btn btn-info"><i class="fas fa-plus"></i></button></a>
+                                    <a href="/ticket/cadastrar-ticket-colaborador/{{colaborador.pk}}/{{id_ticket}}?origem={{origem}}"><button class="btn btn-info"><i class="fas fa-plus"></i></button></a>
                                 </td>
                             </tr>
                             {% endfor %}

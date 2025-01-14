@@ -27,7 +27,7 @@
                             {% if not ticket.colaborador  %}
                                 <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
                             {% else %}
-                                {{ ticket.colaborador }}
+                                <a class="link-primary" href="/ticket/add-ticket-colaborador/{{ticket.id}}?origem=link-colaborador">{{ ticket.colaborador }}</a>
                             {% endif %}
 
                         </td>                                

@@ -11,6 +11,8 @@ from colaborador.models import Colaborador
 from cliente.models import Cliente
 from .forms import TicketForm
 
+from django.shortcuts import render
+
 @login_required
 def dashboardTicket(request):
     usuario = request.user
@@ -70,11 +72,14 @@ def addTicketColaborador(request, id_ticket):
             colaboradores = Colaborador.objects.all()
         else:
             colaboradores = Colaborador.objects.filter(usuario=usuario.pk)
-    
+
+    origem = request.GET.get('origem', None)
+
     context = {
         'colaboradores':colaboradores, 
         'id_ticket':id_ticket,
-        'title': 'Adicionar Colaborador ao Ticket'
+        'title': 'Adicionar Colaborador ao Ticket',
+        'origem': origem,
     }
     return render(request, 'ticket/add-ticket-colaborador.html', context)
 
@@ -92,8 +97,13 @@ def cadastrarTicket(request, id_colaborador, id_ticket):
         ticket.save()
     
         messages.add_message(request, messages.INFO, f"O Colaborador: {ticket.colaborador} foi adicionado ao Ticket: {ticket.ticket} com sucesso!")
-
-        return redirect(f'/ticket/add-ticket-cliente/{id_ticket}')
+        #return HttpResponse(request.POST['editar-colaborador'] == 'editar-colaborador')
+        
+        origem = request.GET['origem']
+        if origem == 'link-colaborador':
+            return redirect('/ticket/')
+        else:
+            return redirect(f'/ticket/add-ticket-cliente/{id_ticket}')
 
 @login_required    
 def addTicketCliente(request, id_ticket):
