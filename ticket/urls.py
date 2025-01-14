@@ -12,4 +12,5 @@ urlpatterns = [
     path('cadastrar-ticket-cliente/<int:id_cliente>/<int:id_ticket>', views.cadastrarTicketCliente, name='cadastrar-ticket-cliente'),
     path('ticket/<int:id_ticket>', views.exibirticket, name="ticket"),
     path('editar-ticket/<int:id_ticket>', views.editarTicketViews, name='editar-ticket'),
+    path('deletar-ticket/<int:id_ticket>', views.deletarTicketViews, name='deletar-ticket'),
 ]

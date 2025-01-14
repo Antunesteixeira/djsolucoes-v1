@@ -10,7 +10,7 @@ class Ticket(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     colaborador = models.ForeignKey(Colaborador, on_delete=models.SET_NULL, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True)
-    status = models.CharField(max_length=1, choices=[('L', 'Levantamento'), ('O', 'Orçamento'), ('A', 'Aprovado'), ('F', 'Finalizado'), ('B', 'Buscar-Prestador')])
+    status = models.CharField(max_length=1, choices=[('L', 'Levantamento'), ('O', 'Orçamento'), ('A', 'Aprovado'), ('F', 'Finalizado'), ('E', 'Emergencial')])
     descricao = models.TextField()
     valor_mao_obra = models.DecimalField(max_digits=10, decimal_places=2)
     valor_custo = models.DecimalField(max_digits=10, decimal_places=2)
@@ -35,7 +35,7 @@ class Ticket(models.Model):
     def func_finalizado(self):
         if self.status == 'F':
             self.finalizado = True
-        elif self.status in ['A', 'O', 'L', 'B']:  # Verificação correta
+        elif self.status in ['A', 'O', 'L', 'B']: 
             self.finalizado = False
         
         return self.finalizado

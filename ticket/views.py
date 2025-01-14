@@ -41,7 +41,7 @@ def addTicket(request):
             existe = Ticket.objects.filter(ticket=ticket_number).exists()
             if existe:
                 messages.add_message(request, messages.WARNING, "O número do Ticket já existe!")
-                return redirect('/ticket/add-ticket/')
+                return redirect('/ticket/add-ticket')
             
             # Se o ticket não existir, salvar o novo ticket
             obj = ticket.save(commit=False)
@@ -51,8 +51,8 @@ def addTicket(request):
             return redirect(f'/ticket/add-ticket-colaborador/{obj.pk}')
         else:
             # Se o formulário não for válido
-            messages.add_message(request, messages.ERROR, "Erro ao cadastrar ticket!")
-            return redirect('/ticket/add-ticket/')
+            messages.add_message(request, messages.ERROR, "Erro ao cadastrar ticket! Verifique as informações de ticket!")
+            return redirect('/ticket/add-ticket')
 
     form = TicketForm()
     context = {
@@ -93,7 +93,7 @@ def cadastrarTicket(request, id_colaborador, id_ticket):
     
         messages.add_message(request, messages.INFO, f"O Colaborador: {ticket.colaborador} foi adicionado ao Ticket: {ticket.ticket} com sucesso!")
 
-        return redirect('/ticket/')
+        return redirect(f'/ticket/add-ticket-cliente/{id_ticket}')
 
 @login_required    
 def addTicketCliente(request, id_ticket):
@@ -146,3 +146,9 @@ def editarTicketViews(request, id_ticket):
         return redirect('/ticket/', messages)
 
     return render(request, 'ticket/editar-ticket.html', {'ticket':ticket, 'form':form})
+
+@login_required
+def deletarTicketViews(request, id_ticket):
+    ticket = Ticket.objects.get(pk=id_ticket).delete()
+    messages.add_message(request, messages.ERROR, "Ticket deletado com sucesso!")
+    return redirect('/ticket/')

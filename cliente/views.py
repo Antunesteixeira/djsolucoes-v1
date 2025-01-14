@@ -17,7 +17,7 @@ from .forms import ClienteForm
 def dashboardCliente(request):
     usuario = request.user
     if has_role(usuario, [User, 'super']):
-        clientes = Cliente.objects.filter(usuario=usuario)
+        clientes = Cliente.objects.all()
     else:
         clientes = Cliente.objects.filter(usuario=request.user.pk)
 

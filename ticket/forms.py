@@ -10,7 +10,8 @@ class TicketForm(forms.ModelForm):
         labels = {
             'ticket': 'Ticket',            
             'status':'Status',
-            'valor_mao_obra': 'Valor Mão de Obra'
+            'valor_custo': 'Custo de Material',
+            'valor_mao_obra': 'Custo Mão de Obra'
         }
 
         widgets = {

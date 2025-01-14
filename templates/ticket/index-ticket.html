@@ -51,14 +51,15 @@
                             {% if ticket.status == 'F' %}
                                 <span class="badge text-bg-danger">Finalizado</span>
                             {% endif %}
-                            {% if ticket.status == 'B' %}
-                                <span class="badge text-bg-dark">Buscar Prestador</span>
+                            {% if ticket.status == 'E' %}
+                                <span class="badge text-bg-dark">Emergencial</span>
                             {% endif %}                              
                         <td>
                             <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye" title="Clique aqui para mais informações do ticket"></i></button></a> |
                             <a href="/ticket/editar-ticket/{{ ticket.id }}"><button class="btn btn-success"><i class="fas fa-edit" title="Clique aqui para editar o ticket"></i></button></a> |
-                            <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger"><i class="fas fa-trash" title="Clique aqui para deletar o ticket"></i></button></a>
+                            <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash" title="Clique aqui para deletar o ticket"></i></button>
                         </td>
+
                     </tr>
                     {% endfor %}
                 </tbody>
