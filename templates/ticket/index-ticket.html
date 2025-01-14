@@ -14,7 +14,7 @@
                         <th scope="col">Usuário</th>
                         <th scope="col">Colaborador</th>
                         <th scope="col">Cliente</th>
-                        <th scope="col">Emergencial</th>
+                        <!-- <th scope="col">Emergencial</th> -->
                         <th scope="col">Status</th>
                         <th scope="col">Ações</th>
                     </tr>
@@ -39,12 +39,12 @@
                                 {{ ticket.cliente }}
                             {% endif %}
                         </td>
-                        <td>  {{ticket.emergencial}}
+                        <!--<td>  {{ticket.emergencial}}
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
                                 <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                             </div>  
-                        </td>  
+                        </td> --> 
                         <td>
                             {% if ticket.status == 'L' %}
                             <span class="badge text-bg-warning">Levantamento</span>
