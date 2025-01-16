@@ -58,7 +58,7 @@ def addTicket(request):
             return redirect('/ticket/add-ticket')
 
     form = TicketForm()
-    form.fields['emergencial'].widget = forms.CheckboxInput()
+    form.fields['emergencial'].widget = forms.CheckboxInput(attrs={'class': 'form-check-input'})
     context = {
         'form': form,
         'title':'Cadastrar Ticket'
