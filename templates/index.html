@@ -106,13 +106,13 @@
                                 <span class="badge text-bg-info">Orçamento</span>
                             {% endif %}
                             {% if ticket.status == 'A' %}
-                                <span class="badge text-bg-success">Aprovado</span>
+                                <span class="badge text-bg-secondary">Aprovado</span>
                             {% endif %}
                             {% if ticket.status == 'F' %}
-                                <span class="badge text-bg-danger">Finalizado</span>
+                                <span class="badge text-bg-dark">Finalizado</span>
                             {% endif %}
-                            {% if ticket.status == 'E' %}
-                            <span class="badge text-bg-danger">Emergencial</span>
+                            {% if ticket.status == 'V' %}
+                                <span class="badge text-bg-success">Vistoriado</span>
                             {% endif %}
                         {% endif %}                              
                     <td>

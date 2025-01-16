@@ -10,9 +10,9 @@ class Ticket(models.Model):
     STATUS_CHOICES = [
         ('L', 'Levantamento'), 
         ('O', 'Orçamento'), 
-        ('A', 'Aprovado'), 
+        ('A', 'Aprovado'),         
+        ('V', 'Vistoriado'),
         ('F', 'Finalizado'), 
-        ('E', 'Emergencial'),
     ]
 
     ticket = models.CharField(max_length=6, unique=True)

@@ -88,20 +88,21 @@
           </p>
           <p class="text-body-secondary mb-0">
           <strong> Status:</strong> 
-                    {% if ticket.status == 'L' %}
-                        <span class="badge text-bg-warning">Levantamento</span>
-                    {% endif %}
-                    {% if ticket.status == 'O' %}
-                        <span class="badge text-bg-info">Orçamento</span>
-                    {% endif %}
-                    {% if ticket.status == 'A' %}
-                        <span class="badge text-bg-success">Aprovado</span>
-                    {% endif %}
-                    {% if ticket.status == 'F' %}
-                        <span class="badge text-bg-danger">Finalizado</span>
-                    {% elif ticket.status == 'E' %}
-                        <span class="badge text-bg-dark">Emergencial</span>
-                    {% endif %}
+              {% if ticket.status == 'L' %}
+              <span class="badge text-bg-warning">Levantamento</span>
+              {% endif %}
+              {% if ticket.status == 'O' %}
+                  <span class="badge text-bg-info">Orçamento</span>
+              {% endif %}
+              {% if ticket.status == 'A' %}
+                  <span class="badge text-bg-secondary">Aprovado</span>
+              {% endif %}
+              {% if ticket.status == 'F' %}
+                  <span class="badge text-bg-dark">Finalizado</span>
+              {% endif %}
+              {% if ticket.status == 'V' %}
+                  <span class="badge text-bg-success">Vistoriado</span>
+              {% endif %}
                     <br />
           </p>
           <p class="text-body-secondary mb-0">
