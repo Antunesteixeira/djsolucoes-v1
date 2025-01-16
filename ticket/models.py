@@ -6,11 +6,20 @@ from cliente.models import Cliente
 from colaborador.models import Colaborador
 
 class Ticket(models.Model):
+    
+    STATUS_CHOICES = [
+        ('L', 'Levantamento'), 
+        ('O', 'Orçamento'), 
+        ('A', 'Aprovado'), 
+        ('F', 'Finalizado'), 
+        ('E', 'Emergencial'),
+    ]
+
     ticket = models.CharField(max_length=6, unique=True)
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     colaborador = models.ForeignKey(Colaborador, on_delete=models.SET_NULL, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True)
-    status = models.CharField(max_length=1, choices=[('L', 'Levantamento'), ('O', 'Orçamento'), ('A', 'Aprovado'), ('F', 'Finalizado'), ('E', 'Emergencial')])
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='L')
     emergencial = models.BooleanField(default=False)
     descricao = models.TextField()
     valor_mao_obra = models.DecimalField(max_digits=10, decimal_places=2)
@@ -43,3 +52,7 @@ class Ticket(models.Model):
     
     def __str__(self):
         return self.ticket
+    
+    
+        
+       

@@ -5,7 +5,7 @@ from .models import Ticket
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ['ticket', 'status', 'valor_mao_obra', 'valor_custo', 'valor_faturamento', 'data_finalizar', 'descricao']
+        fields = ['ticket', 'status', 'emergencial', 'valor_mao_obra', 'valor_custo', 'valor_faturamento', 'data_finalizar', 'descricao']
 
         labels = {
             'ticket': 'Ticket',            
@@ -16,6 +16,7 @@ class TicketForm(forms.ModelForm):
 
         widgets = {
             'ticket': forms.TextInput(attrs={'class': 'form-control','style': 'width: 700px;','placeholder':'nº do ticket'}),
+            'emergencial': forms.HiddenInput(attrs={'class': 'form-check-input'}),
             'status': forms.Select(attrs={'class': 'form-control','style': 'width: 200px;'}),
             'valor_mao_obra': forms.TextInput(attrs={'class': 'form-control','style': 'width: 200px;', 'placeholder':'Exemplo: R$ 100,00'}),
             'valor_custo': forms.TextInput(attrs={'class': 'form-control','style': 'width: 200px;', 'placeholder':'Exemplo: R$ 200,00'}),
@@ -34,3 +35,12 @@ class TicketForm(forms.ModelForm):
             widget=forms.DateInput(attrs={'type': 'date'}),
             input_formats=['%Y-%m-%d', '%d/%m/%Y']  # Formatos aceitos
         )
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # Verifica se o usuário é superusuário
+            if not self.instance.pk:  # Só se o objeto for novo
+                if not self.user.is_superuser:
+                    self.fields['emergencial'].widget = forms.HiddenInput()
+                    self.fields['emergencial'].required = False
+        

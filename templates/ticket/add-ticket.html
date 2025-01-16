@@ -1,11 +1,14 @@
 {% extends '_layout/base.html' %}
 
+{% load django_bootstrap5 %}
+
 {% block conteudo %}
 <div class="row">    
     <form action="{% url 'add-ticket' %}" method="post">
         {% csrf_token %}
         
-        {{ form.as_p }}          
+        {{ form.as_p }}
+                  
         <button type="submit" class="btn btn-success">Cadastrar</button>
     </form>
 </div>

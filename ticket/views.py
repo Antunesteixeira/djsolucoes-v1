@@ -4,6 +4,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from rolepermissions.checkers import has_role
 
+from django import forms
+
 from django.contrib.auth.decorators import login_required
 
 from .models import Ticket
@@ -17,10 +19,9 @@ from django.shortcuts import render
 def dashboardTicket(request):
     usuario = request.user
     if has_role(usuario, [User, 'super']):
-        tickets = Ticket.objects.filter(finalizado=False).order_by('-data_criacao')
+        tickets = Ticket.objects.all().order_by('-data_criacao')        
     else: 
-        tickets = Ticket.objects.filter(finalizado=False, usuario=usuario.pk).order_by('-data_criacao')
-
+        tickets = Ticket.objects.filter(usuario=usuario.pk).order_by('-data_criacao')
     context = {
         'tickets':tickets,
         'title': 'Tickets',
@@ -33,7 +34,7 @@ def addTicket(request):
 
     if request.method == 'POST':
         ticket = TicketForm(request.POST)
-
+        
         # Verificar se o formulário é válido
         if ticket.is_valid():
             # Acessar os dados validados após o formulário ser válido
@@ -57,10 +58,12 @@ def addTicket(request):
             return redirect('/ticket/add-ticket')
 
     form = TicketForm()
+    form.fields['emergencial'].widget = forms.CheckboxInput()
     context = {
         'form': form,
         'title':'Cadastrar Ticket'
     }
+
 
     return render(request, 'ticket/add-ticket.html', context)
 
@@ -149,6 +152,12 @@ def exibirticket(request, id_ticket):
 def editarTicketViews(request, id_ticket):
     ticket = Ticket.objects.get(pk=id_ticket)
     form = TicketForm(request.POST or None, instance=ticket)
+
+    if request.user.is_superuser:
+        form.fields['emergencial'].widget = forms.CheckboxInput()  # Ou o widget que você preferir
+    else:
+        form.fields['emergencial'].widget = forms.HiddenInput()
+
     if form.is_valid():
         finalizado = ticket.func_finalizado()
         form.save()

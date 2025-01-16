@@ -9,7 +9,11 @@
       <div class="row align-items-center mb-7">
         
         <div class="col">
-          <h1 class="fs-4 mb-0">Ticket: #{{ ticket.ticket }}</h1>
+          <h1 class="fs-4 mb-0">Ticket: #{{ ticket.ticket }} {% if ticket.emergencial == True %} 
+            <p class="text-body-secondary mb-0">
+              <span class="badge text-bg-danger">Emergencial</span><br />
+            </p>
+          {% endif%} </h1>
         </div>
         <div class="col-12 col-sm-auto mt-4 mt-sm-4">
           <!-- Action -->
