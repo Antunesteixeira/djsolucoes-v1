@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SG Admin</title>
+        <title>Login - TECKSOLVE</title>
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -22,8 +22,10 @@
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
 
-                                    <div class="card-header">                                        
-                                        <h3 class="text-center font-weight-light my-4">Faça seu login</h3>
+                                    <div class="card-header"> 
+                                        <div style="text-align: center;">                                    
+                                            <img src="{% static 'img/logo4.jpg' %}" height="100" width="100" > 
+                                        </div>   
                                     </div>
                                     {% for message in messages %}
                                         <div class="alert alert-{{ message.tags }} alert-dismissible">
@@ -52,7 +54,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="register.html">Precisa de uma conta? Inscrever-se!</a></div>
                                     </div>
                                 </div>
                             </div>

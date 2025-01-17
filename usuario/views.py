@@ -11,6 +11,8 @@ from rolepermissions.decorators import has_role_decorator, has_permission_decora
 
 from django.contrib.auth.decorators import login_required
 
+from .forms import UsuarioForm
+
 @login_required
 @has_role_decorator('super')
 def dashboarUsuario(request):
@@ -21,6 +23,7 @@ def dashboarUsuario(request):
     }
     return render(request, 'usuario/index-usuarios.html', context)
 
+'''
 @login_required
 @has_role_decorator('super')
 def addUsuario(request):
@@ -39,6 +42,7 @@ def addUsuario(request):
             'title': 'Cadastro de Usuário'
         }
         return render(request, 'usuario/add-usuario.html', context)
+'''
     
 @login_required  
 def sairUsuario(request):
@@ -53,3 +57,21 @@ def perfilUsuario(request, id_usuario):
         'title': 'Perfil do Usuário',
     }
     return render(request, 'usuario/perfil-usuario.html', context)
+
+def criar_usuario(request):
+    form = UsuarioForm(request.POST)
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            obj = form.save()
+            obj.save()
+            messages.add_message(request, messages.SUCCESS, "Usuário cadastrado com sucesso!")
+            return redirect('/usuarios/')
+    else:
+        form = UsuarioForm()
+
+    context = {
+        'title': 'Criar Usuário',
+        'form': form,
+    }
+    return render(request, 'usuario/form-usuario.html', context)

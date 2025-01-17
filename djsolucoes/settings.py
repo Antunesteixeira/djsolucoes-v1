@@ -62,6 +62,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Outros middlewares
+    'core.middleware.SessionExpiryMiddleware', 
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'djsolucoes.urls'
@@ -77,7 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
+                # ↓↓↓ Add this ↓↓↓
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },
@@ -153,3 +157,15 @@ ROLEPERMISSIONS_MODULE = 'usuario.roles'
 
 LOGIN_REDIRECT_URL = '/'
 LOGINOUT_REDIRECT_URL = 'logout'
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': 3600, 
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+    'MESSAGE': 'Sua sessão expirou. Por favor, faça o login para continuar.',
+}
+
+# Define que a sessão expira ao fechar o navegador
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Não renova a sessão automaticamente
+SESSION_SAVE_EVERY_REQUEST = False  
