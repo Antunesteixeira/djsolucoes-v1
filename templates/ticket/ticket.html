@@ -17,10 +17,8 @@
         </div>
         <div class="col-12 col-sm-auto mt-4 mt-sm-4">
           <!-- Action -->
-          <p><a class="btn btn-success d-block" href="/ticket/editar-ticket/{{ticket.id}}"><i class="fas fa-edit"></i></a></p>
-          <p><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fas fa-trash"></i>
-          </a></p>
+          <p><a type="button" class="btn btn-success d-block" href="/ticket/editar-ticket/{{ticket.id}}"><i class="fas fa-edit"></i></a></p>
+          <p><a type="button" class="btn btn-danger d-block" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash"></i></a></p>
         </div>
       </div>
 
@@ -120,5 +118,7 @@
         </div>
       </div>
     </div>
+
+    {% include 'paginas/modal.html' %}
 
 {% endblock %}
