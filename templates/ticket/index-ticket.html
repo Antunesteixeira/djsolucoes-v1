@@ -32,7 +32,7 @@
                         {% endif %}                               
                         <td>
                             {% if not ticket.colaborador  %}
-                                <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
+                                <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><i class="fas fa-user-tag"></i></a>
                             {% else %}
                                 <a class="link-primary" href="/ticket/add-ticket-colaborador/{{ticket.id}}?origem=link-colaborador">{{ ticket.colaborador }}</a>
                             {% endif %}
@@ -40,7 +40,7 @@
                         </td>                                
                         <td>
                             {% if not ticket.cliente %}
-                                <a href="/ticket/add-ticket-cliente/{{ticket.id}}"><button class="btn btn-dark"><i class="fas fa-users"></i></button></a>
+                                <a href="/ticket/add-ticket-cliente/{{ticket.id}}"><i class="fas fa-users"></i></a>
                             {% else %}
                                 {{ ticket.cliente }}
                             {% endif %}

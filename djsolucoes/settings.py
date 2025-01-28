@@ -27,9 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5iqo*7=@pb4zm2s54dz=ak1)ra7mpi2_savdns9+c=^bc-%)mz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
+#DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['34.95.225.226']
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
     'usuario',
     'cliente',
     'ticket',
+    'relatorio',
     
 ]
 
@@ -92,7 +96,6 @@ WSGI_APPLICATION = 'djsolucoes.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 """
 DATABASES = {
     'default': {
@@ -100,7 +103,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

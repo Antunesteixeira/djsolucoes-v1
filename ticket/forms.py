@@ -15,7 +15,7 @@ class TicketForm(forms.ModelForm):
         }
 
         widgets = {
-            'ticket': forms.TextInput(attrs={'class': 'form-control','style': 'width: 700px;','placeholder':'nº do ticket'}),
+            'ticket': forms.TextInput(attrs={'class': 'form-control','style': 'width: 200px;','placeholder':'nº do ticket'}),
             'emergencial': forms.HiddenInput(attrs={'class': 'form-check-input'}),
             'status': forms.Select(attrs={'class': 'form-control','style': 'width: 200px;'}),
             'valor_mao_obra': forms.TextInput(attrs={'class': 'form-control','style': 'width: 200px;', 'placeholder':'Exemplo: R$ 100,00'}),
@@ -28,7 +28,7 @@ class TicketForm(forms.ModelForm):
                     'class': 'form-control'  # Opcional, para limitar a largura
                 }
             ),
-            'descricao': forms.Textarea(attrs={'class': 'form-control','style': 'width: 700px;', 'rows': 2, 'placeholder':'Faça a descrição do ticket'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Faça a descrição do ticket'}),
         }
 
         data_finalizar = forms.DateField(
