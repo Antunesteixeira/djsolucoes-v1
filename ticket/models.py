@@ -12,7 +12,8 @@ class Ticket(models.Model):
         ('O', 'Orçamento'), 
         ('A', 'Aprovado'),         
         ('V', 'Vistoriado'),
-        ('F', 'Finalizado'), 
+        ('F', 'Finalizado'),
+        ('R', 'Rejeitado'), 
     ]
 
     ticket = models.CharField(max_length=6, unique=True)

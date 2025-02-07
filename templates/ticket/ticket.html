@@ -101,7 +101,10 @@
               {% if ticket.status == 'V' %}
                   <span class="badge text-bg-success">Vistoriado</span>
               {% endif %}
-                    <br />
+              {% if ticket.status == 'R' %}
+                  <span class="badge text-bg-light">Rejeitado</span>
+              {% endif %}
+              <br />
           </p>
           <p class="text-body-secondary mb-0">
             <strong>Descrição:</strong>{{ ticket.descricao }} <br />

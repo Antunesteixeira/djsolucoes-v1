@@ -114,6 +114,9 @@
                             {% if ticket.status == 'V' %}
                                 <span class="badge text-bg-success">Vistoriado</span>
                             {% endif %}
+                            {% if ticket.status == 'R' %}
+                                <span class="badge text-bg-light">Rejeitado</span>
+                            {% endif %}
                         {% endif %}                              
                     <td>
                         <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye"></i></button></a> |
