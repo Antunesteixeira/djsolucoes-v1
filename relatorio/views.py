@@ -2,6 +2,15 @@ from django.shortcuts import render, redirect
 from ticket.models import Ticket
 from .forms import FiltroForm
 
+
+from rolepermissions.roles import assign_role
+from rolepermissions.checkers import has_role
+from rolepermissions.decorators import has_role_decorator, has_permission_decorator
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+@has_role_decorator('super')
 def relatorioViews(request):
     if request.method == 'POST':
         form = FiltroForm(request.POST or None)
@@ -26,7 +35,7 @@ def relatorioViews(request):
                 tickets = tickets.filter(status=selected_option, ultimo_update__lte=end_date)
             else:
                 tickets = tickets.filter(status=selected_option)
-                
+            
             context = {
                 'title': 'Relatórios',
                 'form':form,

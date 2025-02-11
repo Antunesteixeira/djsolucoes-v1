@@ -26,12 +26,12 @@
                     {% if user|has_role:'super' %}
                     <th scope="col">Usuário</th>
                     {% endif %}
-                    <th scope="col">Colaborador</th>
-                    <th scope="col">Valores</th>
-                    <th scope="col">Cliente</th>
+                    <!--<th scope="col">Colaborador</th>-->
+                    <th scope="col">Custo</th>
+                    <th scope="col">Mão de Obra</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Soma</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +40,8 @@
                     <td>{{ ticket.ticket }}</td>
                     {% if user|has_role:'super' %}
                     <td>{{ ticket.usuario }}</td> 
-                    {% endif %}                               
+                    {% endif %}
+                    <!--                               
                     <td>
                         {% if not ticket.colaborador  %}
                             <a href="/ticket/add-ticket-colaborador/{{ticket.id}}"><button class="btn btn-primary text-white"><i class="fas fa-user-tag"></i></button></a>
@@ -49,6 +50,7 @@
                         {% endif %}
 
                     </td>
+                    -->
                     <td>{{ ticket.valor_custo }}</td>
                     <td>{{ ticket.valor_mao_obra }}</td>                                 
                     
@@ -76,9 +78,7 @@
                             <span class="badge text-bg-success">Vistoriado</span>
                         {% endif %}                              
                     <td>
-                        <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye" title="Clique aqui para mais informações do ticket"></i></button></a> |
-                        <a href="/ticket/editar-ticket/{{ ticket.id }}"><button class="btn btn-success"><i class="fas fa-edit" title="Clique aqui para editar o ticket"></i></button></a> |
-                        <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash" title="Clique aqui para deletar o ticket"></i></button>
+                        R$ {{ ticket.valor_custo }}
                     </td>
 
                 </tr>
