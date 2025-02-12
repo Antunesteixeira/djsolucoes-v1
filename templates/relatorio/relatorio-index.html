@@ -86,8 +86,8 @@
                     </td>
                     -->
                     <td>{{ ticket.colaborador }}</td>
-                    <td>{{ ticket.valor_faturamento }}</td> 
-                    <td>{{ ticket.valor_custo }}</td>                                 
+                    <td>R$ {{ ticket.valor_faturamento }}</td> 
+                    <td>R$ {{ ticket.valor_custo }}</td>                                 
                     <!--
                     <td>  
                         {% if ticket.emergencial == True %}
@@ -116,7 +116,7 @@
                         R$ {{ ticket.valor_custo }}
                     </td>
                     -->
-                    <td>{{ ticket.valor_mao_obra }}</td>
+                    <td>R$ {{ ticket.valor_mao_obra }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
