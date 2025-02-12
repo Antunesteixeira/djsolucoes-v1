@@ -41,7 +41,7 @@ class Ticket(models.Model):
             return self.valor_mao_obra + self.valor_custo
     
     def func_bdi(self):
-        return self.valor_faturamento/self.func_valor_custo_total()
+        return self.valor_faturamento / self.func_valor_custo_total()
 
     def func_finalizado(self):
         if self.status == 'F':

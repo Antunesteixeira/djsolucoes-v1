@@ -30,6 +30,9 @@ def relatorioViews(request):
         if form.is_valid():
             # Captura o valor do botão de rádio selecionado
             selected_option = form.cleaned_data['selected_option']
+            
+            selected_option_user = form.cleaned_data['selected_option_user']
+            
             create_date = form.cleaned_data['create_date']
             start_date = form.cleaned_data['start_date']
             end_date = form.cleaned_data['end_date']
@@ -38,28 +41,57 @@ def relatorioViews(request):
             # Faça algo com o valor capturado, como salvar no banco de dados
             # Verificar se as datas foram informadas
             if create_date:
-                tickets = tickets.filter(status=selected_option, data_criacao=create_date)
+                if selected_option_user:
+                    tickets = tickets.filter(status=selected_option, data_criacao=create_date, usuario=selected_option_user)
+                else:
+                    tickets = tickets.filter(status=selected_option, data_criacao=create_date)
 
             if start_date and end_date:
                 # Filtrar entre as datas apenas se ambas forem fornecidas
-                tickets = tickets.filter(status=selected_option , ultimo_update__range=(start_date, end_date))
+                if selected_option_user:
+                    tickets = tickets.filter(status=selected_option , ultimo_update__range=(start_date, end_date), usuario=selected_option_user)
+                else:
+                    tickets = tickets.filter(status=selected_option , ultimo_update__range=(start_date, end_date))
             elif start_date:
                 # Filtrar a partir da data inicial
-                tickets = tickets.filter(status=selected_option, ultimo_update__gte=start_date)
+                if selected_option_user:
+                    tickets = tickets.filter(status=selected_option, ultimo_update__gte=start_date, usuario=selected_option_user)
+                else:
+                    tickets = tickets.filter(status=selected_option, ultimo_update__gte=start_date)
             elif end_date:
                 # Filtrar até a data final
-                tickets = tickets.filter(status=selected_option, ultimo_update__lte=end_date)
+                if selected_option_user:
+                    tickets = tickets.filter(status=selected_option, ultimo_update__lte=end_date, usuario=selected_option_user)
+                else:
+                    tickets = tickets.filter(status=selected_option, ultimo_update__lte=end_date)
             else:
-                tickets = tickets.filter(status=selected_option)
+                if selected_option_user:
+                    tickets = tickets.filter(status=selected_option, usuario=selected_option_user)
+                else:
+                    tickets = tickets.filter(status=selected_option)
 
-            total_faturamento = sum(ticket.valor_faturamento for ticket in tickets) 
 
-            
+            total_faturamento_bruto = sum(ticket.valor_faturamento for ticket in tickets)
+            total_mao_obra = sum(ticket.valor_mao_obra for ticket in tickets)
+            total_custo_material = sum(ticket.valor_custo for ticket in tickets)
+            total_faturamento_liquido = total_faturamento_bruto - (total_mao_obra + total_custo_material)
+
+            # Calcular a média da margem e arredondar para 4 casas decimais           
+            if len(tickets) > 0:
+                media_margem = round(sum(round(ticket.func_bdi(), 5) for ticket in tickets) / len(tickets), 4)
+            else:
+                media_margem = 0  # Caso não haja tickets, atribui 0 à média
+        
+
             context = {
                 'title': 'Relatórios',
                 'form':form,
                 'tickets': tickets,
-                'total_faturamento':total_faturamento, 
+                'total_faturamento_bruto':total_faturamento_bruto,
+                'total_faturamento_liquido':total_faturamento_liquido,
+                'total_mao_obra': total_mao_obra,
+                'total_material': total_custo_material, 
+                'media_margem': media_margem,
                 'form': form,
             }
 

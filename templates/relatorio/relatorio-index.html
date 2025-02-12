@@ -8,8 +8,32 @@
 
 <form action="{% url 'relatorios-index' %}" method="post">
     {% csrf_token %}
-  
-    {% bootstrap_form form %}    
+    <div class="row" >
+        <div class="col-md-3">{% bootstrap_field form.selected_option %}</div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3">
+            {% if user|has_role:'super' %}
+                {% bootstrap_field form.selected_option_user %}
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3">
+            {% bootstrap_field form.create_date %}
+        </div>
+        <div class="col-md-3">
+            {% bootstrap_field form.start_date %}
+        </div>
+        <div class="col-md-3">
+            {% bootstrap_field form.end_date %}
+        </div>      
+        
+        
+    </div>
+    
       
     <button type="submit" name="pesquisar" class="btn btn-success">Pesquisar</button>
     <button type="submit" name="limpar" class="btn btn-warning">Limpar</button>
@@ -19,7 +43,15 @@
 <div class="card mb-4">
     <div class="card-header">
         Relatórios
-        {% if total_faturamento %}<p class="text-success">R$ {{total_faturamento }}</p>{% else %} {%endif%}
+        {% if total_faturamento_bruto %}
+            <p><strong>Faturamento Bruto: </strong><span class="text-primary">R$ {{total_faturamento_bruto}}</span></p>
+            <p><strong>Faturamento Líquido: </strong><span class="text-success">R$ {{total_faturamento_liquido}}</span></p>
+            <p><strong>Custo Material: </strong><span class="text-success">R$ {{total_material}}</span></p>
+            <p><strong>Custo Mão de Obra: </strong><span class="text-success">R$ {{total_mao_obra}}</span></p>
+            <p><strong>Média da Margem: </strong><span class="text-secondary">{{ media_margem }}</span></p>
+        {% else %} 
+        
+        {%endif%}
     </div>
     <div class="card-body">
         <table id="datatablesSimple">
@@ -55,7 +87,7 @@
                     -->
                     <td>{{ ticket.colaborador }}</td>
                     <td>{{ ticket.valor_faturamento }}</td> 
-                    <td>{{ ticket.custo_material }}</td>                                 
+                    <td>{{ ticket.valor_custo }}</td>                                 
                     <!--
                     <td>  
                         {% if ticket.emergencial == True %}
@@ -84,7 +116,7 @@
                         R$ {{ ticket.valor_custo }}
                     </td>
                     -->
-                    <td></td>
+                    <td>{{ ticket.valor_mao_obra }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
