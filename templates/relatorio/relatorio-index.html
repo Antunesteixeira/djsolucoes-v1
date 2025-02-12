@@ -12,11 +12,14 @@
     {% bootstrap_form form %}    
       
     <button type="submit" name="pesquisar" class="btn btn-success">Pesquisar</button>
+    <button type="submit" name="limpar" class="btn btn-warning">Limpar</button>
+    
 </form>
 
 <div class="card mb-4">
     <div class="card-header">
         Relatórios
+        {% if total_faturamento %}<p class="text-success">R$ {{total_faturamento }}</p>{% else %} {%endif%}
     </div>
     <div class="card-body">
         <table id="datatablesSimple">
@@ -27,11 +30,10 @@
                     <th scope="col">Usuário</th>
                     {% endif %}
                     <!--<th scope="col">Colaborador</th>-->
-                    <th scope="col">Custo</th>
+                    <th scope="col">Colaborador</th>
+                    <th scope="col">Faturamento</th>
+                    <th scope="col">Custo Material</th>
                     <th scope="col">Mão de Obra</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Soma</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +53,10 @@
 
                     </td>
                     -->
-                    <td>{{ ticket.valor_custo }}</td>
-                    <td>{{ ticket.valor_mao_obra }}</td>                                 
-                    
+                    <td>{{ ticket.colaborador }}</td>
+                    <td>{{ ticket.valor_faturamento }}</td> 
+                    <td>{{ ticket.custo_material }}</td>                                 
+                    <!--
                     <td>  
                         {% if ticket.emergencial == True %}
                         <span class="badge text-bg-danger">Emergencial</span>                              
@@ -80,7 +83,8 @@
                     <td>
                         R$ {{ ticket.valor_custo }}
                     </td>
-
+                    -->
+                    <td></td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -15,6 +15,8 @@ from .forms import TicketForm
 
 from django.shortcuts import render
 
+from datetime import datetime
+
 @login_required
 def dashboardTicket(request):
     usuario = request.user
@@ -160,6 +162,7 @@ def editarTicketViews(request, id_ticket):
 
     if form.is_valid():
         finalizado = ticket.func_finalizado()
+        ticket.ultimo_update = datetime.now()
         form.save()
         messages.add_message(request, messages.SUCCESS, "Ticket alterado com sucesso!")
         return redirect('/ticket/', messages)

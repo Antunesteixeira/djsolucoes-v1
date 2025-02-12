@@ -14,6 +14,12 @@ class FiltroForm(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'form-control', 'style': 'width: 200px;'}),
     )
 
+    create_date = forms.DateField(
+        required=False, 
+        widget=forms.DateInput(attrs={'type': 'date','style': 'width: 200px;'}),
+        label="Data de Criação"
+    )
+
     start_date = forms.DateField(
         required=False, 
         widget=forms.DateInput(attrs={'type': 'date','style': 'width: 200px;'}),
