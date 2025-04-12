@@ -45,10 +45,12 @@
         Relatórios
         {% if total_faturamento_bruto %}
             <p><strong>Faturamento Bruto: </strong><span class="text-primary">R$ {{total_faturamento_bruto}}</span></p>
+            {% if user|has_role:'super' %}
             <p><strong>Faturamento Líquido: </strong><span class="text-success">R$ {{total_faturamento_liquido}}</span></p>
             <p><strong>Custo Material: </strong><span class="text-success">R$ {{total_material}}</span></p>
             <p><strong>Custo Mão de Obra: </strong><span class="text-success">R$ {{total_mao_obra}}</span></p>
             <p><strong>Média da Margem: </strong><span class="text-secondary">{{ media_margem }}</span></p>
+            {% endif %}
         {% else %} 
         
         {%endif%}

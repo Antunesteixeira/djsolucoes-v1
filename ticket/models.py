@@ -8,9 +8,9 @@ from colaborador.models import Colaborador
 class Ticket(models.Model):
     
     STATUS_CHOICES = [
-        ('L', 'Levantamento'), 
         ('O', 'Orçamento'), 
-        ('A', 'Aprovado'),         
+        ('A', 'Aprovado'),
+        ('E', 'Executado'),         
         ('V', 'Vistoriado'),
         ('F', 'Finalizado'),
         ('R', 'Rejeitado'), 

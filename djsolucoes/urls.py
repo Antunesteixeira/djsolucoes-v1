@@ -29,6 +29,7 @@ urlpatterns = [
     path('cliente/', include('cliente.urls')),
     path('ticket/', include('ticket.urls')),
     path('relatorios/', include('relatorio.urls')),
+    path('orcamento/', include('orcamento.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

@@ -99,8 +99,8 @@
                             
                         {% else %}
 
-                            {% if ticket.status == 'L' %}
-                            <span class="badge text-bg-warning">Levantamento</span>
+                            {% if ticket.status == 'E' %}
+                            <span class="badge text-bg-warning">Executado</span>
                             {% endif %}
                             {% if ticket.status == 'O' %}
                                 <span class="badge text-bg-info">Orçamento</span>
@@ -120,6 +120,7 @@
                         {% endif %}                              
                     <td>
                         <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye"></i></button></a> |
+                        <a href="{% url 'index-orcamento' ticket.id %}"><button class="btn btn-primary text-white"><i class="fas fa-brazilian-real-sign"></i></button></a> |
                         <a href="/ticket/editar-ticket/{{ ticket.id }}"><button class="btn btn-success"><i class="fas fa-edit"></i></button></a> |
                         <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
                     </td>

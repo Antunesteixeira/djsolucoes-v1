@@ -9,7 +9,9 @@ class Operador(AbstractUserRole):
 
 class Colaborador(AbstractUserRole):
     available_permissions = {
+        'criar_ticket': True,
         'ver_ticket': True,
+        'update_ticket': True,
     }
 
 class Super(AbstractUserRole):

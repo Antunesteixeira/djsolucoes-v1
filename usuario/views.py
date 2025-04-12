@@ -47,6 +47,7 @@ def addUsuario(request):
 @login_required  
 def sairUsuario(request):
     logout(request)
+    messages.add_message(request, messages.SUCCESS, "Volte sempre!")
     return redirect('/accounts/login')
 
 @login_required
