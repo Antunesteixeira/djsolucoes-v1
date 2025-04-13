@@ -171,6 +171,7 @@ def editarTicketViews(request, id_ticket):
 
 @login_required
 def deletarTicketViews(request, id_ticket):
-    ticket = Ticket.objects.get(pk=id_ticket).delete()
-    messages.add_message(request, messages.ERROR, "Ticket deletado com sucesso!")
+    ticket = get_object_or_404(Ticket, pk=id_ticket)
+    ticket.delete()
+    messages.success(request, "Ticket deletado com sucesso!")
     return redirect('/ticket/')

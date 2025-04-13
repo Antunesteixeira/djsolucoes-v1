@@ -10,16 +10,17 @@ from rolepermissions.checkers import has_role
 
 
 class FiltroForm(forms.Form):
-    CHOICES = [
-        ('L', 'Levantamento'),
-        ('O', 'Orçamento'),
+    STATUS_CHOICES = [
+        ('O', 'Orçamento'), 
         ('A', 'Aprovado'),
+        ('E', 'Executado'),         
         ('V', 'Vistoriado'),
         ('F', 'Finalizado'),
+        ('R', 'Rejeitado'), 
     ]
 
     selected_option = forms.ChoiceField(
-        choices=CHOICES, 
+        choices=STATUS_CHOICES, 
         widget=forms.RadioSelect(attrs={'class': 'form-control', 'style': 'width: 200px;'}),
         label="Status do Ticket"
     )

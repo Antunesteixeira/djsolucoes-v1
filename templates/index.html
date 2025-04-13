@@ -119,10 +119,10 @@
                             {% endif %}
                         {% endif %}                              
                     <td>
-                        <a href="/ticket/ticket/{{ ticket.pk }}"><button class="btn btn-secondary text-white"><i class="fas fa-eye"></i></button></a> |
+                        <a href="{% url 'ticket' ticket.id %}"><button class="btn btn-secondary text-white"><i class="fas fa-eye"></i></button></a> |
                         <!--<a href="{% url 'index-orcamento' ticket.id %}" class="btn btn-secondary disabled"><button disabled class="btn btn-primary text-white"><i class="fas fa-brazilian-real-sign"></i></button></a> |-->
-                        <a href="/ticket/editar-ticket/{{ ticket.id }}"><button class="btn btn-success"><i class="fas fa-edit"></i></button></a> |
-                        <a href="/ticket/deletar-ticket/{{ ticket.id }}"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                        <a href="{% url 'editar-ticket' ticket.id %}"><button class="btn btn-success"><i class="fas fa-edit"></i></button></a> |
+                        <a href="{% url 'deletar-ticket' ticket.id %}"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
                     </td>
                 </tr>
                 {% endfor %}
